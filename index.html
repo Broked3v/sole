@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>$SOLE — Shoeless on Solana</title>
+  <meta name="description" content="$SOLE — Shoeless. No roadmap. Just vibes on Solana." />
+  <meta name="theme-color" content="#0b0b0b" />
+  <meta property="og:title" content="$SOLE — Shoeless on Solana" />
+  <meta property="og:description" content="Shoeless. No roadmap. Just vibes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="sole-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root{
+      --bg: #f4efe5;
+      --ink: #101010;
+      --muted: rgba(16,16,16,.62);
+      --line: rgba(16,16,16,.14);
+      --radius: 18px;
+      --shadow: 0 14px 50px rgba(0,0,0,.10);
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--ink);
+      background:
+        radial-gradient(900px 400px at 20% 10%, rgba(0, 150, 80, .10), transparent 60%),
+        radial-gradient(800px 400px at 85% 15%, rgba(0, 150, 80, .08), transparent 55%),
+        var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 26px 18px;
+    }
+    .wrap{ width: min(980px, 100%); }
+    .frame{
+      background: rgba(255,255,255,.55);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      backdrop-filter: blur(8px);
+    }
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+      flex-wrap:wrap;
+      margin-bottom: 14px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      font-weight: 650;
+      letter-spacing: .2px;
+    }
+    .dot{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: #0aa35b;
+      box-shadow: 0 0 18px rgba(10,163,91,.25);
+    }
+    .links{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .link{
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      color: var(--ink);
+      text-decoration:none;
+      font-weight: 650;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .link:hover{ transform: translateY(-1px); background: rgba(255,255,255,.8); }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+      padding: 8px;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+    .left{
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.60);
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(44px, 6vw, 74px);
+      line-height: 1.03;
+      letter-spacing: -1px;
+    }
+    .sub{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.55;
+      max-width: 56ch;
+    }
+    .ctaRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      color: var(--ink);
+      font-weight: 750;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
+    .btn.primary{
+      background: #101010;
+      color: #fff;
+      border-color: rgba(0,0,0,.25);
+    }
+    .btn.primary:hover{ background: #000; }
+    .tiny{
+      margin-top: 12px;
+      color: rgba(16,16,16,.52);
+      font-size: .92rem;
+      line-height: 1.5;
+    }
+
+    .right{
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.60);
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
+    .logoCard{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.8);
+      border-radius: 18px;
+      padding: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height: 220px;
+    }
+    .logoCard img{
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      display:block;
+      border-radius: 14px;
+    }
+    .info{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .tile{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .k{ color: rgba(16,16,16,.55); font-size: .86rem; }
+    .v{ font-weight: 800; margin-top: 2px; letter-spacing:.2px; }
+
+    .mint{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .mint label{
+      display:block;
+      font-size: .86rem;
+      color: rgba(16,16,16,.55);
+      margin-bottom: 8px;
+      font-weight: 650;
+    }
+    .mintRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    input{
+      flex: 1 1 240px;
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      color: var(--ink);
+      outline:none;
+    }
+    input::placeholder{ color: rgba(16,16,16,.35); }
+    .mini{
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      font-weight: 800;
+      cursor:pointer;
+    }
+    .mini:hover{ background: rgba(255,255,255,.95); }
+
+    .footer{
+      margin-top: 14px;
+      padding: 14px 6px 0;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: rgba(16,16,16,.45);
+      font-size: .92rem;
+    }
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 18px;
+      width: min(760px, calc(100vw - 36px));
+      border: 1px solid rgba(16,16,16,.18);
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.18);
+      padding: 12px 12px;
+      display:none;
+      text-align:left;
+      color: rgba(16,16,16,.85);
+    }
+    .toast strong{ color: var(--ink); }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="frame">
+      <div class="top">
+        <div class="badge">
+          <span class="dot"></span>
+          <span>SHOELESS</span>
+          <span style="opacity:.55;">•</span>
+          <span>$SOLE</span>
+        </div>
+        <div class="links">
+          <a class="link" id="xLink" href="#" rel="noopener noreferrer">X</a>
+          <a class="link" id="tgLink" href="#" rel="noopener noreferrer">Telegram</a>
+          <a class="link" id="dexLink" href="#" rel="noopener noreferrer">Chart</a>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="left">
+          <h1>$SOLE</h1>
+          <p class="sub">Shoeless. No roadmap. Just vibes on Solana.</p>
+
+          <div class="ctaRow">
+            <button class="btn primary" onclick="openSwap()">Buy</button>
+            <button class="btn" onclick="copyMint()">Copy mint</button>
+            <a class="btn" href="#token">Token</a>
+          </div>
+
+          <p class="tiny">
+            When the mint is live, paste it on the right and the Buy button will open a SOL → $SOLE swap.
+            (Swap opens Jupiter on Solana — standard aggregator.)
+          </p>
+        </div>
+
+        <aside class="right" id="token">
+          <div class="logoCard">
+            <img src="sole-logo.png" alt="$SOLE logo" />
+          </div>
+
+          <div class="info">
+            <div class="tile"><div class="k">Chain</div><div class="v">Solana</div></div>
+            <div class="tile"><div class="k">Tax</div><div class="v">0%</div></div>
+            <div class="tile"><div class="k">Supply</div><div class="v">1,000,000,000</div></div>
+            <div class="tile"><div class="k">Vibe</div><div class="v" id="vibe">barefoot</div></div>
+          </div>
+
+          <div class="mint">
+            <label>Token mint (paste when live)</label>
+            <div class="mintRow">
+              <input id="mintInput" placeholder="TOKEN_MINT_ADDRESS_HERE" autocomplete="off" />
+              <button class="mini" onclick="openSwap()">Swap</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="footer">
+        <div>© <span id="year"></span> $SOLE • financial comedy</div>
+        <div>Keep it simple. Don’t spend rent money.</div>
+      </div>
+    </section>
+
+    <div class="toast" id="toast"></div>
+  </main>
+
+  <script>
+    // CONFIG (edit these)
+    const DEFAULT_TOKEN_MINT = "";
+    const X_URL  = "#";
+    const TG_URL = "#";
+    const DEX_URL = "#";
+
+    const $ = (id) => document.getElementById(id);
+
+    function toast(msg){
+      const t = $("toast");
+      t.innerHTML = msg;
+      t.style.display = "block";
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => t.style.display = "none", 3200);
+    }
+
+    function currentMint(){
+      const v = ($("mintInput").value || "").trim();
+      return v || DEFAULT_TOKEN_MINT;
+    }
+
+    function openSwap(){
+      const mint = currentMint();
+      if(!mint){
+        toast("<strong>$SOLE:</strong> mint isn’t set yet. Paste it on the right when live.");
+        return;
+      }
+      window.open("https://jup.ag/swap/SOL-" + encodeURIComponent(mint), "_blank", "noopener,noreferrer");
+    }
+
+    async function copyMint(){
+      const mint = currentMint();
+      if(!mint){
+        toast("<strong>$SOLE:</strong> no mint set yet.");
+        return;
+      }
+      try{
+        await navigator.clipboard.writeText(mint);
+        toast("<strong>Copied:</strong> mint address");
+      }catch{
+        toast("<strong>$SOLE:</strong> could not copy — select and copy manually.");
+      }
+    }
+
+    $("xLink").href = X_URL;
+    $("tgLink").href = TG_URL;
+    $("dexLink").href = DEX_URL;
+
+    const vibes = ["barefoot", "clean", "simple", "quietly bullish", "shoeless", "soleful"];
+    setInterval(() => { $("vibe").textContent = vibes[Math.floor(Math.random() * vibes.length)]; }, 9000);
+
+    $("year").textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>
